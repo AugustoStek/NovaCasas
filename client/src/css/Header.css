@@ -1,0 +1,51 @@
+/* HEADER */
+
+.header {
+  @apply bg-[#0f172a] shadow-md border-b border-[#1e293b];
+}
+
+.header-container {
+  @apply flex justify-between items-center max-w-6xl mx-auto p-3;
+}
+
+/* LOGO */
+
+.header-logo {
+  @apply font-bold text-sm sm:text-xl flex flex-wrap;
+}
+
+.logo-primary {
+  @apply text-cyan-400;
+}
+
+.logo-secondary {
+  @apply text-white;
+}
+
+/* SEARCH */
+
+.header-search-form {
+  @apply bg-[#1e293b] p-3 rounded-lg flex items-center border border-slate-700;
+}
+
+.header-search-input {
+  @apply bg-transparent text-slate-100 placeholder-slate-400 focus:outline-none w-24 sm:w-64;
+}
+
+.header-search-icon {
+  @apply text-cyan-300;
+}
+
+/* NAVIGATION */
+
+.header-nav {
+  @apply flex gap-4;
+}
+
+.header-nav-item {
+  @apply text-slate-300 hover:text-cyan-300 hover:underline transition duration-200;
+}
+
+.hidden-mobile {
+  @apply hidden sm:inline;
+}
