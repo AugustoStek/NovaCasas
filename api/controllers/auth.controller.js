@@ -1,7 +1,7 @@
 const User = require('../models/user.model');
 const bcrypt = require('bcryptjs'); 
 
-const signup = async (req, res) => {
+const signup = async (req, res, next) => {
     const { username, email, password } = req.body;
 
     // Hashear la contraseña
@@ -18,11 +18,9 @@ const signup = async (req, res) => {
         res.status(201).json('Usuario creado correctamente'); // Enviamos una respuesta indicando que el usuario fue creado exitosamente
         //console.log("Usuario guardado correctamente"); // Puedes usar esto para verificar en la consola que el usuario se ha guardado correctamente
     } catch (error) {
-        console.error("Error al crear el usuario:", error);
-        res.status(500).json({ error: error.message }); // Enviamos una respuesta de error si ocurre algún problema al guardar el usuario
+        next(error); // Si ocurre un error, lo pasamos al middleware de manejo de errores
+        //next(errorHandler(550, 'error de la función signup')); // Si ocurre un error, lo pasamos al middleware de manejo de errores con un mensaje personalizado
     }
-
-
 };
 
 module.exports = {
