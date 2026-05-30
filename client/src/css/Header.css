@@ -25,7 +25,7 @@
 /* SEARCH */
 
 .header-search-form {
-  @apply bg-[#1e293b] p-3 rounded-lg flex items-center border border-slate-700;
+  @apply bg-[#1e293b] p-3 rounded-lg flex items-center border border-slate-700 hover:border-slate-500;
 }
 
 .header-search-input {
