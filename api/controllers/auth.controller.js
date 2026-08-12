@@ -31,7 +31,7 @@ const signin = async (req, res, next) => {
         const validUser = await User.findOne({ email }); // Buscamos un usuario con el correo electrónico proporcionado
 
         if(!validUser) {
-            return next(errorHandler(404, 'Usuario no encontrado'));
+            return next(errorHandler(401, 'Nombre de usuario o contraseña no validos.'));
         }
 
         const validPassword = await bcrypt.compare(password, validUser.password); // Comparamos la contraseña proporcionada con la contraseña hasheada almacenada en la base de datos
@@ -56,6 +56,46 @@ const signin = async (req, res, next) => {
     }
 }
 
+const google = async (req, res, next) => {
+    try{
+        const user = await User.findOne({ email: req.body.email });
+        if(user){
+            const token = jwt.sign({ id: user._id}, process.env.JWT_SECRET)
+            const { password: pass, ...rest} = user._doc;
+            res
+            .cookie(
+                'access_token', 
+                token,
+                {httpOnly: true}
+            )
+            .status(200)
+            .json(rest);
+        }else{
+            const generatedPassword = Math.random().toString(36).slice(-8); // Genera una contraseña aleatoria de 8 caracteres
+            const hashedPassword = await bcrypt.hash(generatedPassword, 10); // Hashea la contraseña generada
+            const newUser = new User({
+                username: req.body.name.split(' ').join("").toLowerCase() + Math.random().toString(36).slice(-4), // Genera un nombre de usuario único basado en el nombre del usuario y un número aleatorio
+                email: req.body.email,
+                password: hashedPassword, // Guardamos la contraseña hasheada en lugar de la original
+                avatar: req.body.photo
+            });
+            await newUser.save();
+            const token = jwt.sign({ id: newUser._id}, process.env.JWT_SECRET)
+            const { password: pass, ...rest} = newUser._doc;
+            res
+            .cookie(
+                'access_token', 
+                token,
+                {httpOnly: true}
+            )
+            .status(200)
+            .json(rest);
+        }
+    }catch(error){
+        next(error);
+    }
+};
+
 module.exports = {
-    signup, signin
+    signup, signin, google
 }
