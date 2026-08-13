@@ -1,0 +1,102 @@
+.profile-container {
+    @apply
+    min-h-[80vh]
+    flex
+    flex-col
+    items-center
+    px-4;
+}
+
+.tittle {
+    @apply
+    text-3xl
+    font-bold
+    text-center
+    text-slate-100
+    mt-10
+    mb-8;
+}
+
+.form-profile {
+    @apply
+    w-full
+    max-w-md
+    flex
+    flex-col
+    gap-4;
+}
+
+.imagen-profile {
+    @apply
+    rounded-full
+    h-24
+    w-24
+    object-cover
+    cursor-pointer
+    self-center
+    mb-4;
+}
+
+.input-profile {
+    @apply
+    w-full
+    p-3
+    rounded-lg
+    border
+    border-slate-700
+    bg-[#1e293b]
+    text-slate-100
+    placeholder-slate-400
+    transition-all
+    duration-200;
+}
+
+.input-profile:focus {
+    @apply
+    outline-none
+    border-cyan-500
+    ring-2
+    ring-cyan-500/20;
+}
+
+.btn-profile {
+    @apply
+    bg-cyan-600
+    text-white
+    py-3
+    rounded-lg
+    uppercase
+    font-semibold
+    tracking-wide
+    transition-all
+    duration-200
+    mt-2;
+}
+
+.btn-profile:hover {
+    @apply
+    bg-cyan-500
+    shadow-lg;
+}
+
+.div-profile {
+    @apply
+    w-full
+    max-w-md
+    flex
+    justify-between
+    mt-6;
+}
+
+.span-profile {
+    @apply
+    text-red-500
+    cursor-pointer
+    transition-colors
+    duration-200;
+}
+
+.span-profile:hover {
+    @apply
+    text-red-400;
+}
